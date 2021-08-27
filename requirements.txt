@@ -1,0 +1,4 @@
+Django>=3,<4
+pydantic[dotenv]==1.8.2
+djangorestframework==3.12.4
+dj_database_url==0.5.0
