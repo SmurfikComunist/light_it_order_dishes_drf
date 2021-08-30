@@ -44,6 +44,8 @@ class DishViewSet(viewsets.ModelViewSet):
         "update": serializers.DishUpdateSerializer,
         "partial_update": serializers.DishUpdateSerializer,
     }
+    filter_backends = [OrderingFilter]
+    ordering_fields = ["created_at"]
 
     def get_serializer_class(self):
         return self.serializer_action_classes[self.action]
