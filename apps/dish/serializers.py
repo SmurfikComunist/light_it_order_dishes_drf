@@ -196,7 +196,7 @@ class OrderIngredientRetrieveSerializer(serializers.ModelSerializer):
 class OrderRetrieveSerializer(serializers.ModelSerializer):
     dish = OrderDishSerializer()
     ingredients = OrderIngredientRetrieveSerializer(
-        source='order_ingredients', many=True
+        source="order_ingredients", many=True
     )
     created_at = serializers.DateTimeField(format="iso-8601")
     updated_at = serializers.DateTimeField(format="iso-8601")
