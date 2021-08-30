@@ -66,6 +66,8 @@ class OrderViewSet(
         "create": serializers.OrderCreateSerializer,
         "retrieve": serializers.OrderRetrieveSerializer,
     }
+    filter_backends = [OrderingFilter]
+    ordering_fields = ["created_at"]
 
     def get_serializer_class(self):
         return self.serializer_action_classes[self.action]
