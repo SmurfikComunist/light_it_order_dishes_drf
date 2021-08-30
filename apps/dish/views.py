@@ -3,7 +3,6 @@ from typing import (
     Dict,
 )
 
-from django.db import transaction
 from rest_framework import (
     viewsets,
     mixins,
