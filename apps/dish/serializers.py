@@ -30,6 +30,9 @@ class IngredientCreateSerializer(serializers.ModelSerializer):
 
 
 class IngredientRetrieveSerializer(serializers.ModelSerializer):
+    created_at = serializers.DateTimeField(format="iso-8601")
+    updated_at = serializers.DateTimeField(format="iso-8601")
+
     class Meta:
         model = models.Ingredient
         fields = [
@@ -86,6 +89,8 @@ class DishIngredientRetrieveSerializer(serializers.ModelSerializer):
 
 class DishRetrieveSerializer(serializers.ModelSerializer):
     ingredients = DishIngredientRetrieveSerializer(many=True)
+    created_at = serializers.DateTimeField(format="iso-8601")
+    updated_at = serializers.DateTimeField(format="iso-8601")
 
     class Meta:
         model = models.Dish
@@ -126,6 +131,7 @@ class OrderDishSerializer(serializers.ModelSerializer):
 
 class OrderListSerializer(serializers.ModelSerializer):
     dish = OrderDishSerializer()
+    created_at = serializers.DateTimeField(format="iso-8601")
 
     class Meta:
         model = models.Order
@@ -192,6 +198,8 @@ class OrderRetrieveSerializer(serializers.ModelSerializer):
     ingredients = OrderIngredientRetrieveSerializer(
         source='order_ingredients', many=True
     )
+    created_at = serializers.DateTimeField(format="iso-8601")
+    updated_at = serializers.DateTimeField(format="iso-8601")
 
     class Meta:
         model = models.Order
