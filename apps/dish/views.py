@@ -8,7 +8,10 @@ from rest_framework import (
     mixins,
 )
 from rest_framework.exceptions import ValidationError
-from rest_framework.filters import OrderingFilter
+from rest_framework.filters import (
+    OrderingFilter,
+    SearchFilter,
+)
 
 from . import models
 from . import serializers
@@ -43,8 +46,9 @@ class DishViewSet(viewsets.ModelViewSet):
         "update": serializers.DishUpdateSerializer,
         "partial_update": serializers.DishUpdateSerializer,
     }
-    filter_backends = [OrderingFilter]
+    filter_backends = [OrderingFilter, SearchFilter]
     ordering_fields = ["created_at"]
+    search_fields = ["name"]
 
     def get_serializer_class(self):
         return self.serializer_action_classes[self.action]
