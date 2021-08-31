@@ -3,6 +3,7 @@ from typing import (
     Dict,
 )
 
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import (
     viewsets,
     mixins,
@@ -15,6 +16,7 @@ from rest_framework.filters import (
 
 from . import models
 from . import serializers
+from .filters import DishDateTimeFilter
 
 
 class IngredientViewSet(viewsets.ModelViewSet):
@@ -46,9 +48,10 @@ class DishViewSet(viewsets.ModelViewSet):
         "update": serializers.DishUpdateSerializer,
         "partial_update": serializers.DishUpdateSerializer,
     }
-    filter_backends = [OrderingFilter, SearchFilter]
+    filter_backends = [OrderingFilter, SearchFilter, DjangoFilterBackend]
     ordering_fields = ["created_at"]
     search_fields = ["name"]
+    filterset_class = DishDateTimeFilter
 
     def get_serializer_class(self):
         return self.serializer_action_classes[self.action]
